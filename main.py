@@ -76,7 +76,7 @@ def build_ratios(comps) -> dict:
 
 def hour_quantiles_gaussian(p1: float, h: int, ratios: dict) -> list[float]:
     """q_tau = p1 * exp(m_h + z_tau * s_h) from comparable log-ratios."""
-    vals = ratios.get(h)
+    vals = ratios.get(h, [])  # default to empty list if hour missing
     n = len(vals)
     if n == 0:
         return [round2(p1 * math.exp(z * SIGMA_BASE * math.sqrt(h - 1))) for z in Z]
